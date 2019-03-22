@@ -55,7 +55,7 @@ extension LaunchView: LaunchViewProtocol {
                 UIView.animate(withDuration: duration, animations: {
                     self.animatedView.transform = .identity
                 }, completion: { finished in
-                    self.startAnimation(group: group) {
+                    self.startAnimation(group: .B) {
                         UIView.animate(withDuration: duration, animations: {
                             self.animatedView.backgroundColor = .blue
                         }, completion: { finished in
@@ -67,21 +67,48 @@ extension LaunchView: LaunchViewProtocol {
         })
     }
     
-    private func startAnimation(group: AnimationGroup, completion: () -> ()) {
+    private func startAnimation(group: AnimationGroup, completion: @escaping () -> ()) {
         switch group {
         case .A :
-            print("A")
-            completion()
             
+            UIView.animate(withDuration: 0.2, animations: {
+                self.animatedView.layer.cornerRadius = self.animatedView.frame.width/2
+            }, completion: { finished in
+                completion()
+            })
             
         case .B :
-            print("B")
-            completion()
             
+            CATransaction.begin()
             
+            let duration = 0.2
+            let rotateAnim = CABasicAnimation(keyPath: "transform.rotation.y")
+            rotateAnim.duration = duration
+            rotateAnim.fromValue = 0
+            rotateAnim.toValue = 2*Double.pi
+            rotateAnim.repeatCount = 1
+            
+            CATransaction.setCompletionBlock {
+                UIView.animate(withDuration: duration, animations: {
+                    self.animatedView.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+                }, completion: { finished in
+                    UIView.animate(withDuration: duration, animations: {
+                        self.animatedView.transform = .identity
+                    }, completion: { finished in
+                        completion()
+                    })
+                })
+            }
+            
+            animatedView.layer.add(rotateAnim, forKey: nil)
+            
+            CATransaction.commit()
+            
+            var transform = CATransform3DIdentity
+            transform.m34 = 1.0 / 500.0
+            animatedView.layer.transform = transform
         }
     }
-
 }
 
 extension LaunchView {

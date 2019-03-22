@@ -241,7 +241,6 @@
 			isa = PBXGroup;
 			children = (
 				F5A570DF2244375F00F73055 /* Entities */,
-				F5A570E02244376800F73055 /* Protocols */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -258,13 +257,6 @@
 			children = (
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		F5A570E02244376800F73055 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		F5A570E1224437D300F73055 /* Detail */ = {
