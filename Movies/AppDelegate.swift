@@ -9,14 +9,32 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        setupAppearance()
+        
+        window = UIWindow()
+        window?.rootViewController = TabBarRouter.createTabBarModule()
+        window?.makeKeyAndVisible()
+        
         return true
+    }
+    
+    private func setupAppearance() {
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = .black
+        tabBarAppearance.barTintColor = .white
+        tabBarAppearance.isTranslucent = false
+        tabBarAppearance.unselectedItemTintColor = Colors.barItem
+        
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.titleTextAttributes = [.font: UIFont(name: Fonts.avenirBold, size: 19)!]
+        navigationBarAppearance.barTintColor = .white
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -40,7 +58,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
