@@ -8,14 +8,26 @@
 
 import Foundation
 
+enum AnimationGroup: CaseIterable {
+    
+    case A
+    
+    case B
+}
+
 final class LaunchPresenter: LaunchPresenterProtocol {
     
     weak var view: LaunchViewProtocol?
     
     var router: LaunchRouterProtocol?
     
-    func viewDidLoad() {
-        
+    func viewDidAppear() {
+        let randomGroup = AnimationGroup.allCases.randomElement()!
+        view?.showAnimation(group: randomGroup)
+    }
+    
+    func animationFinished() {
+        router?.presentTabBarView(from: view!)
     }
 
 }

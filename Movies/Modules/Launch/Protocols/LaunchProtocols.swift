@@ -14,7 +14,7 @@ protocol LaunchViewProtocol: class {
     
     // Presenter -> View
     
-    func showAnimation()
+    func showAnimation(group: AnimationGroup)
 }
 
 protocol LaunchPresenterProtocol: class {
@@ -24,7 +24,9 @@ protocol LaunchPresenterProtocol: class {
     
     // View -> Presenter
     
-    func viewDidLoad()
+    func viewDidAppear()
+    
+    func animationFinished()
 }
 
 protocol LaunchRouterProtocol: class {

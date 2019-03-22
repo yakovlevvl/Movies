@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         
         window = UIWindow()
-        window?.rootViewController = TabBarRouter.createTabBarModule()
+        window?.rootViewController = LaunchRouter.createLaunchModule() //TabBarRouter.createTabBarModule()
         window?.makeKeyAndVisible()
         
         return true

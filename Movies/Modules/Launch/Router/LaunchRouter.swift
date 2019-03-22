@@ -23,6 +23,7 @@ final class LaunchRouter: LaunchRouterProtocol {
     }
     
     func presentTabBarView(from view: LaunchViewProtocol) {
-        
+        let tabBarViewController = TabBarRouter.createTabBarModule()
+        UIApplication.shared.keyWindow?.rootViewController = tabBarViewController
     }
 }
