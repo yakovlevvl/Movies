@@ -29,5 +29,4 @@ final class LaunchPresenter: LaunchPresenterProtocol {
     func animationFinished() {
         router?.presentTabBarView(from: view!)
     }
-
 }

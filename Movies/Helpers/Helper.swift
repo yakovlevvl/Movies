@@ -12,6 +12,8 @@ import Photos
 let screenWidth = UIScreen.main.bounds.width
 let screenHeight = UIScreen.main.bounds.height
 
+typealias Json = [String : Any]
+
 extension URL {
     
     func createVideoThumbnail() -> UIImage? {

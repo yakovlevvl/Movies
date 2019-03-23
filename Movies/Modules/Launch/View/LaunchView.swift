@@ -37,7 +37,6 @@ final class LaunchView: UIViewController {
         
         presenter?.viewDidAppear()
     }
-
 }
 
 extension LaunchView: LaunchViewProtocol {
@@ -74,6 +73,7 @@ extension LaunchView: LaunchViewProtocol {
             UIView.animate(withDuration: 0.2, animations: {
                 self.animatedView.layer.cornerRadius = self.animatedView.frame.width/2
             }, completion: { finished in
+                //
                 completion()
             })
             

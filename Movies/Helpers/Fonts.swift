@@ -13,5 +13,4 @@ enum Fonts {
     static let avenir = "AvenirNext-DemiBold"
     
     static let avenirBold = "AvenirNext-Bold"
-
 }
