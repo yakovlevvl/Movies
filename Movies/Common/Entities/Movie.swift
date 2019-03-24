@@ -30,6 +30,10 @@ final class Movie: Codable {
         return url
     }
     
+    var hasDetails: Bool {
+        return budget != nil && rating != nil && country != nil
+    }
+    
     init(id: Int, title: String, overview: String, date: String, posterPath: String?) {
         self.id = id
         self.title = title
@@ -42,6 +46,7 @@ final class Movie: Codable {
 extension Movie {
     
     private enum CodingKeys: String, CodingKey {
+        
         case id
         case title
         case overview

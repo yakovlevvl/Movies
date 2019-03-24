@@ -41,6 +41,12 @@
 		F5ACECE02245C5630023A9D8 /* PopularRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECDF2245C5630023A9D8 /* PopularRemoteDataManager.swift */; };
 		F5ACECE32245CD180023A9D8 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECE22245CD180023A9D8 /* MovieCell.swift */; };
 		F5ACECE522465B540023A9D8 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECE422465B540023A9D8 /* Api.swift */; };
+		F5ACECE72247DC870023A9D8 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECE62247DC870023A9D8 /* DetailView.swift */; };
+		F5ACECE92247DCAA0023A9D8 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECE82247DCAA0023A9D8 /* DetailInteractor.swift */; };
+		F5ACECEB2247DCC40023A9D8 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECEA2247DCC40023A9D8 /* DetailPresenter.swift */; };
+		F5ACECED2247DCDD0023A9D8 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECEC2247DCDD0023A9D8 /* DetailRouter.swift */; };
+		F5ACECF12247DD720023A9D8 /* DetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECF02247DD720023A9D8 /* DetailRemoteDataManager.swift */; };
+		F5ACECF32247DD9A0023A9D8 /* DetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5ACECF22247DD9A0023A9D8 /* DetailProtocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +86,12 @@
 		F5ACECDF2245C5630023A9D8 /* PopularRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRemoteDataManager.swift; sourceTree = "<group>"; };
 		F5ACECE22245CD180023A9D8 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		F5ACECE422465B540023A9D8 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		F5ACECE62247DC870023A9D8 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		F5ACECE82247DCAA0023A9D8 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		F5ACECEA2247DCC40023A9D8 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		F5ACECEC2247DCDD0023A9D8 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		F5ACECF02247DD720023A9D8 /* DetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRemoteDataManager.swift; sourceTree = "<group>"; };
+		F5ACECF22247DD9A0023A9D8 /* DetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProtocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,6 +441,7 @@
 		F5A570F5224439A000F73055 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECEC2247DCDD0023A9D8 /* DetailRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -436,6 +449,7 @@
 		F5A570F6224439A000F73055 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECE82247DCAA0023A9D8 /* DetailInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -443,6 +457,7 @@
 		F5A570F7224439A000F73055 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECE62247DC870023A9D8 /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -450,6 +465,7 @@
 		F5A570F8224439A000F73055 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECEF2247DD0B0023A9D8 /* Remote */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -457,6 +473,7 @@
 		F5A570F9224439A000F73055 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECF22247DD9A0023A9D8 /* DetailProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -464,6 +481,7 @@
 		F5A570FA224439A000F73055 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				F5ACECEA2247DCC40023A9D8 /* DetailPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -509,6 +527,14 @@
 				F5ACECE22245CD180023A9D8 /* MovieCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F5ACECEF2247DD0B0023A9D8 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				F5ACECF02247DD720023A9D8 /* DetailRemoteDataManager.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -589,14 +615,17 @@
 				F5A5710D2244695E00F73055 /* TabBarPresenter.swift in Sources */,
 				F5A570FF22443E0E00F73055 /* LaunchProtocols.swift in Sources */,
 				F5ACECE32245CD180023A9D8 /* MovieCell.swift in Sources */,
+				F5ACECF32247DD9A0023A9D8 /* DetailProtocols.swift in Sources */,
 				F5A5712D2245428300F73055 /* Fonts.swift in Sources */,
 				F5A5710322443E9700F73055 /* LaunchView.swift in Sources */,
 				F5A57125224489BA00F73055 /* SearchInteractor.swift in Sources */,
 				F5A57123224489A900F73055 /* SearchProtocols.swift in Sources */,
 				F5A57109224466DD00F73055 /* TabBarRouter.swift in Sources */,
+				F5ACECE92247DCAA0023A9D8 /* DetailInteractor.swift in Sources */,
 				F5A571172244872100F73055 /* FavoritesProtocols.swift in Sources */,
 				F5A57126224489BD00F73055 /* SearchView.swift in Sources */,
 				F5ACECD82245B4240023A9D8 /* PopularInteractor.swift in Sources */,
+				F5ACECE72247DC870023A9D8 /* DetailView.swift in Sources */,
 				F5ACECDA2245B5670023A9D8 /* Movie.swift in Sources */,
 				F5A571072244652A00F73055 /* TabBarView.swift in Sources */,
 				F5A570BF22441D4A00F73055 /* AppDelegate.swift in Sources */,
@@ -612,6 +641,9 @@
 				F5A5712F2245429A00F73055 /* Helper.swift in Sources */,
 				F5A5710F2244811300F73055 /* PopularView.swift in Sources */,
 				F5ACECE522465B540023A9D8 /* Api.swift in Sources */,
+				F5ACECF12247DD720023A9D8 /* DetailRemoteDataManager.swift in Sources */,
+				F5ACECED2247DCDD0023A9D8 /* DetailRouter.swift in Sources */,
+				F5ACECEB2247DCC40023A9D8 /* DetailPresenter.swift in Sources */,
 				F5A57105224458AC00F73055 /* PopularProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

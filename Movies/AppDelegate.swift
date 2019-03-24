@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.titleTextAttributes = [.font: UIFont(name: Fonts.avenirBold, size: 19)!]
+        navigationBarAppearance.tintColor = .black
         navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.isTranslucent = false
     }

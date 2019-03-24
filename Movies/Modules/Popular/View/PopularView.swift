@@ -20,6 +20,11 @@ final class PopularView: UICollectionViewController {
         collectionView.backgroundColor = Colors.gray
         navigationItem.title = "Popular"
         
+        let backItem = UIBarButtonItem()
+        backItem.title = "Popular"
+        backItem.setTitleTextAttributes([.font: UIFont(name: Fonts.avenir, size: 18)!], for: .normal)
+        navigationItem.backBarButtonItem = backItem
+        
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseId)
         
         presenter?.viewDidLoad()

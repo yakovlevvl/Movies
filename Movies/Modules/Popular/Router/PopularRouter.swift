@@ -31,6 +31,10 @@ final class PopularRouter: PopularRouterProtocol {
     }
     
     func presentDetailView(from view: PopularViewProtocol, for movie: Movie) {
+        let detailViewController = DetailRouter.createDetailModule(for: movie)
         
+        if let viewController = view as? UIViewController {
+            viewController.navigationController?.pushViewController(detailViewController, animated: true)
+        }
     }
 }

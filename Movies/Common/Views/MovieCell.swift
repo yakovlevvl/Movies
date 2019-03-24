@@ -88,7 +88,11 @@ final class MovieCell: UICollectionViewCell {
     }
     
     func setDate(_ date: String) {
-        dateLabel.text = date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: date)!
+        dateFormatter.dateStyle = .medium
+        dateLabel.text = dateFormatter.string(from: date)
     }
     
     func setPoster(_ image: UIImage?) {
