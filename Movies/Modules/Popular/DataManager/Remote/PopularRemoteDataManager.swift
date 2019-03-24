@@ -47,7 +47,7 @@ final class PopularRemoteDataManager: PopularRemoteDataManagerInputProtocol {
             }
             
             DispatchQueue.main.async {
-                self.interactor?.onMoviesFetched(movies)
+                self.interactor?.onMoviesFetched(movies, page: page)
             }
     
         }.resume()

@@ -45,14 +45,24 @@ final class PopularPresenter: PopularPresenterProtocol {
 
 extension PopularPresenter: PopularInteractorOutputProtocol {
     
-    func didFetchMovies(_ movies: [Movie]) {
+    func didFetchMovies(_ movies: [Movie], cache: Bool) {
         guard !movies.isEmpty else {
             paginationEnabled = false
             return
         }
-        self.movies += movies
-        view?.reloadData()
+        if nextPage == 1 {
+            self.movies = movies
+            view?.reloadData(with: !cache)
+            paginationEnabled = !cache
+        } else  {
+            let fromIndex = self.movies.count
+            self.movies += movies
+            view?.insertItems(at: fromIndex..<self.movies.count)
+        }
         nextPage += 1
+    }
+    
+    func didFinishInsertItems() {
         paginationEnabled = true
     }
     

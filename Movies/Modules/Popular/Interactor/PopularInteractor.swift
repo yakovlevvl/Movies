@@ -15,6 +15,9 @@ final class PopularInteractor: PopularInteractorInputProtocol {
     var remoteDataManager: PopularRemoteDataManagerInputProtocol?
     
     func fetchMovies(page: Int) {
+        if page == 1, let movies = localDataManager?.fetchMovies() {
+            presenter?.didFetchMovies(movies, cache: true)
+        }
         remoteDataManager?.fetchMovies(page: page)
     }
 
@@ -22,10 +25,12 @@ final class PopularInteractor: PopularInteractorInputProtocol {
 
 extension PopularInteractor: PopularRemoteDataManagerOutputProtocol {
     
-    func onMoviesFetched(_ movies: [Movie]) {
-        presenter?.didFetchMovies(movies)
+    func onMoviesFetched(_ movies: [Movie], page: Int) {
+        presenter?.didFetchMovies(movies, cache: false)
         
-        // cache movies
+        if page == 1 {
+            localDataManager?.cacheMovies(movies)
+        }
     }
     
     func onError() {

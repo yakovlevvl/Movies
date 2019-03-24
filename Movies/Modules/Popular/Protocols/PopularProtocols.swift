@@ -14,7 +14,9 @@ protocol PopularViewProtocol: class {
     
     // Presenter -> View
     
-    func reloadData()
+    func reloadData(with animation: Bool)
+    
+    func insertItems(at indexes: Range<Int>)
     
     func showError()
 }
@@ -35,6 +37,8 @@ protocol PopularPresenterProtocol: class {
     
     func showDetailForMovie(with index: Int)
     
+    func didFinishInsertItems()
+    
     func paginate()
 }
 
@@ -51,7 +55,7 @@ protocol PopularInteractorOutputProtocol: class {
     
     // Interactor -> Presenter
     
-    func didFetchMovies(_ movies: [Movie])
+    func didFetchMovies(_ movies: [Movie], cache: Bool)
     
     func onError()
 }
@@ -80,7 +84,7 @@ protocol PopularRemoteDataManagerOutputProtocol: class {
     
     // RemoteDataManager -> Interactor
     
-    func onMoviesFetched(_ movies: [Movie])
+    func onMoviesFetched(_ movies: [Movie], page: Int)
     
     func onError()
 }
@@ -91,5 +95,5 @@ protocol PopularLocalDataManagerInputProtocol: class {
     
     func fetchMovies() -> [Movie]?
     
-    func saveMoviesData(_ data: Data) throws
+    func cacheMovies(_ movies: [Movie])
 }

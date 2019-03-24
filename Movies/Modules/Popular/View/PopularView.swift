@@ -15,12 +15,12 @@ final class PopularView: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        presenter?.viewDidLoad()
-        
         collectionView.backgroundColor = .white
         navigationItem.title = "Popular"
         
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseId)
+        
+        presenter?.viewDidLoad()
     }
     
     override func viewWillLayoutSubviews() {
@@ -62,8 +62,23 @@ extension PopularView: UICollectionViewDelegateFlowLayout {
 
 extension PopularView: PopularViewProtocol {
     
-    func reloadData() {
-        collectionView.reloadData()
+    func insertItems(at indexes: Range<Int>) {
+        collectionView.performBatchUpdates({
+            let indexPath: [IndexPath] = indexes.map {
+                IndexPath(item: $0, section: 0)
+            }
+            collectionView.insertItems(at: indexPath)
+        }, completion: { finished in
+            self.presenter?.didFinishInsertItems()
+        })
+    }
+    
+    func reloadData(with animation: Bool) {
+        if animation {
+            collectionView.reloadSections(IndexSet(integer: 0))
+        } else {
+            collectionView.reloadData()
+        }
     }
     
     func showError() {
