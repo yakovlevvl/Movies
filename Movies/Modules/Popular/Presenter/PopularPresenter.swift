@@ -54,12 +54,14 @@ extension PopularPresenter: PopularInteractorOutputProtocol {
             self.movies = movies
             view?.reloadData(with: !cache)
             paginationEnabled = !cache
-        } else  {
+        } else {
             let fromIndex = self.movies.count
             self.movies += movies
             view?.insertItems(at: fromIndex..<self.movies.count)
         }
-        nextPage += 1
+        if !cache {
+            nextPage += 1
+        }
     }
     
     func didFinishInsertItems() {
@@ -69,5 +71,11 @@ extension PopularPresenter: PopularInteractorOutputProtocol {
     func onError() {
         view?.showError()
         paginationEnabled = true
+    }
+    
+    func didReceiveMemoryWarning() {
+        movies.forEach { movie in
+            movie.posterImage = nil
+        }
     }
 }

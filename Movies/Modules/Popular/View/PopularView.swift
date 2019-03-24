@@ -15,7 +15,7 @@ final class PopularView: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Colors.gray
         navigationItem.title = "Popular"
         
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.reuseId)
@@ -28,7 +28,13 @@ final class PopularView: UICollectionViewController {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize.width = view.frame.width
-        layout.itemSize.height = 70
+        layout.itemSize.height = 210
+        layout.minimumLineSpacing = 0.5
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        presenter?.didReceiveMemoryWarning()
     }
 }
 
@@ -40,8 +46,32 @@ extension PopularView {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseId, for: indexPath) as! MovieCell
+        
+        cell.tag += 1
+        let tag = cell.tag
+        
         let movie = presenter!.getMovie(with: indexPath.item)
         cell.setTitle(movie.title)
+        cell.setOverview(movie.overview)
+        cell.setDate(movie.date)
+        
+        if let posterImage = movie.posterImage {
+            cell.setPoster(posterImage)
+        } else {
+            guard let posterUrl = movie.posterUrl else {
+                cell.setPoster(nil)
+                return cell
+            }
+            URLSession.getImage(url: posterUrl) { image in
+                if let image = image {
+                    movie.posterImage = image
+                    if cell.tag == tag {
+                        cell.setPoster(image)
+                    }
+                }
+            }
+        }
+        
         return cell
     }
 }
@@ -72,7 +102,7 @@ extension PopularView: PopularViewProtocol {
             self.presenter?.didFinishInsertItems()
         })
     }
-    
+
     func reloadData(with animation: Bool) {
         if animation {
             collectionView.reloadSections(IndexSet(integer: 0))

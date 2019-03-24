@@ -12,5 +12,7 @@ enum Colors {
     
     static let barItem = UIColor(hex: "687781")
     
-    static let gray = UIColor(r: 236, g: 236, b: 236)
+    static let placeholder = UIColor(r: 242, g: 242, b: 242)
+    
+    static let gray = UIColor(hex: "A8B1B7")
 }

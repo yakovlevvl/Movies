@@ -40,6 +40,8 @@ protocol PopularPresenterProtocol: class {
     func didFinishInsertItems()
     
     func paginate()
+    
+    func didReceiveMemoryWarning()
 }
 
 protocol PopularRouterProtocol: class {

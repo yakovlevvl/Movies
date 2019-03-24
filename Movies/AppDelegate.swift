@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         
         window = UIWindow()
-        window?.rootViewController = LaunchRouter.createLaunchModule() //TabBarRouter.createTabBarModule()
+        window?.rootViewController = LaunchRouter.createLaunchModule()
         window?.makeKeyAndVisible()
         
         return true
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.titleTextAttributes = [.font: UIFont(name: Fonts.avenirBold, size: 19)!]
         navigationBarAppearance.barTintColor = .white
+        navigationBarAppearance.isTranslucent = false
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

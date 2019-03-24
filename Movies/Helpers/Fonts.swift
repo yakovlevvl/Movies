@@ -10,6 +10,8 @@ import UIKit
 
 enum Fonts {
     
+    static let avenirMedium = "AvenirNext-Medium"
+    
     static let avenir = "AvenirNext-DemiBold"
     
     static let avenirBold = "AvenirNext-Bold"

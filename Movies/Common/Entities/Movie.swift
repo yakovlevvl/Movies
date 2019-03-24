@@ -6,7 +6,7 @@
 //  Copyright © 2019 Vladyslav Yakovlev. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class Movie: Codable {
     
@@ -20,11 +20,13 @@ final class Movie: Codable {
     var rating: Double?
     var country: String?
     
+    var posterImage: UIImage?
+    
     var posterUrl: URL? {
         guard let path = posterPath else {
             return nil
         }
-        let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+        let url = URL(string: "https://image.tmdb.org/t/p/w300\(path)")
         return url
     }
     
@@ -34,5 +36,16 @@ final class Movie: Codable {
         self.overview = overview
         self.date = date
         self.posterPath = posterPath
+    }
+}
+
+extension Movie {
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case overview
+        case date
+        case posterPath
     }
 }
