@@ -95,6 +95,18 @@ final class MovieCell: UICollectionViewCell {
         posterView.image = image
     }
     
+    func showSkeleton() {
+        titleLabel.backgroundColor = Colors.placeholder
+        overviewLabel.backgroundColor = Colors.placeholder
+        dateLabel.backgroundColor = Colors.placeholder
+    }
+    
+    func hideSkeleton() {
+        titleLabel.backgroundColor = .clear
+        overviewLabel.backgroundColor = .clear
+        dateLabel.backgroundColor = .clear
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

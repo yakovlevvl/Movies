@@ -12,6 +12,8 @@ final class PopularView: UICollectionViewController {
     
     var presenter: PopularPresenterProtocol?
     
+    private var skeletonEnabled = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,11 +43,18 @@ final class PopularView: UICollectionViewController {
 extension PopularView {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter!.getMoviesCount()
+        return !skeletonEnabled ? presenter!.getMoviesCount() : 6
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reuseId, for: indexPath) as! MovieCell
+        
+        if skeletonEnabled {
+            cell.showSkeleton()
+            return cell
+        } else {
+            cell.hideSkeleton()
+        }
         
         cell.tag += 1
         let tag = cell.tag
@@ -79,7 +88,7 @@ extension PopularView {
 extension PopularView: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        presenter?.showDetailForMovie(with: indexPath.item)
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -103,12 +112,18 @@ extension PopularView: PopularViewProtocol {
         })
     }
 
-    func reloadData(with animation: Bool) {
-        if animation {
-            collectionView.reloadSections(IndexSet(integer: 0))
-        } else {
-            collectionView.reloadData()
-        }
+    func reloadData() {
+        collectionView.reloadData()
+    }
+    
+    func showSkeleton() {
+        skeletonEnabled = true
+        collectionView.reloadData()
+    }
+    
+    func hideSkeleton() {
+        skeletonEnabled = false
+        collectionView.reloadData()
     }
     
     func showError() {

@@ -14,9 +14,13 @@ protocol PopularViewProtocol: class {
     
     // Presenter -> View
     
-    func reloadData(with animation: Bool)
+    func reloadData()
     
     func insertItems(at indexes: Range<Int>)
+    
+    func showSkeleton()
+    
+    func hideSkeleton()
     
     func showError()
 }

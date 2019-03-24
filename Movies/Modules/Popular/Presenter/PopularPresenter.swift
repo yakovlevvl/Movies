@@ -20,7 +20,14 @@ final class PopularPresenter: PopularPresenterProtocol {
     
     private var nextPage = 1
     
+    private var skeletonEnabled = false {
+        didSet {
+            skeletonEnabled ? view?.showSkeleton() : view?.hideSkeleton()
+        }
+    }
+    
     func viewDidLoad() {
+        skeletonEnabled = true
         interactor?.fetchMovies(page: nextPage)
     }
     
@@ -46,13 +53,16 @@ final class PopularPresenter: PopularPresenterProtocol {
 extension PopularPresenter: PopularInteractorOutputProtocol {
     
     func didFetchMovies(_ movies: [Movie], cache: Bool) {
+        if skeletonEnabled {
+            skeletonEnabled = false
+        }
         guard !movies.isEmpty else {
             paginationEnabled = false
             return
         }
         if nextPage == 1 {
             self.movies = movies
-            view?.reloadData(with: !cache)
+            view?.reloadData()
             paginationEnabled = !cache
         } else {
             let fromIndex = self.movies.count
