@@ -54,7 +54,7 @@ extension LaunchView: LaunchViewProtocol {
                 UIView.animate(withDuration: duration, animations: {
                     self.animatedView.transform = .identity
                 }, completion: { finished in
-                    self.startAnimation(group: .B) {
+                    self.startAnimation(group: group) {
                         UIView.animate(withDuration: duration, animations: {
                             self.animatedView.backgroundColor = .blue
                         }, completion: { finished in
@@ -70,11 +70,31 @@ extension LaunchView: LaunchViewProtocol {
         switch group {
         case .A :
             
-            UIView.animate(withDuration: 0.2, animations: {
+            let duration = 0.2
+            UIView.animate(withDuration: duration, animations: {
                 self.animatedView.layer.cornerRadius = self.animatedView.frame.width/2
             }, completion: { finished in
-                //
-                completion()
+                
+                CATransaction.begin()
+                
+                let rotateAnim = CABasicAnimation(keyPath: "transform.rotation.x")
+                rotateAnim.byValue = 2*Double.pi
+                
+                let translationAnim = CABasicAnimation(keyPath: "transform.translation.y")
+                translationAnim.byValue = -self.view.frame.height*0.15
+                
+                let groupAnim = CAAnimationGroup()
+                groupAnim.animations = [rotateAnim, translationAnim]
+                groupAnim.duration = 2*duration
+                groupAnim.autoreverses = true
+                
+                CATransaction.setCompletionBlock {
+                    completion()
+                }
+                
+                self.animatedView.layer.add(groupAnim, forKey: nil)
+                
+                CATransaction.commit()
             })
             
         case .B :
