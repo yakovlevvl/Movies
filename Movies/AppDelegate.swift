@@ -37,6 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.tintColor = .black
         navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.isTranslucent = false
+        
+        let searchBarFont = UIFont(name: Fonts.avenir, size: 18)!
+        let searchFieldAppearance = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self])
+        searchFieldAppearance.defaultTextAttributes = [.font: searchBarFont]
+        searchFieldAppearance.attributedPlaceholder = NSAttributedString(string: "Search", attributes: [.font: searchBarFont, .foregroundColor: Colors.searchBarPlaceholder])
+        
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([.font: searchBarFont, .foregroundColor: UIColor.black], for: .normal)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

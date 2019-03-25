@@ -78,6 +78,8 @@ protocol SearchInteractorInputProtocol: class {
     // Presenter -> Interactor
     
     func fetchResults(for searchText: String, page: Int)
+    
+    func cancelFetching()
 }
 
 protocol SearchRemoteDataManagerInputProtocol: class {
@@ -87,6 +89,8 @@ protocol SearchRemoteDataManagerInputProtocol: class {
     // Interactor -> RemoteDataManager
     
     func fetchResults(for searchText: String, page: Int)
+    
+    func cancelFetching()
 }
 
 protocol SearchRemoteDataManagerOutputProtocol: class {

@@ -14,5 +14,7 @@ enum Colors {
     
     static let placeholder = UIColor(r: 242, g: 242, b: 242)
     
+    static let searchBarPlaceholder = UIColor(r: 176, g: 176, b: 176)
+    
     static let gray = UIColor(hex: "A8B1B7")
 }

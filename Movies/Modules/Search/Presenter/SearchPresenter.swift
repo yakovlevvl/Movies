@@ -60,6 +60,7 @@ final class SearchPresenter: SearchPresenterProtocol {
             results.removeAll()
             view?.reloadData()
             view?.hideNoMoviesMessage()
+            interactor?.cancelFetching()
             if skeletonEnabled {
                 skeletonEnabled = false
             }

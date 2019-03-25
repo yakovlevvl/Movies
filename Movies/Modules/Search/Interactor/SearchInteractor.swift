@@ -16,6 +16,10 @@ final class SearchInteractor: SearchInteractorInputProtocol {
     func fetchResults(for searchText: String, page: Int) {
         remoteDataManager?.fetchResults(for: searchText, page: page)
     }
+    
+    func cancelFetching() {
+        remoteDataManager?.cancelFetching()
+    }
 }
 
 extension SearchInteractor: SearchRemoteDataManagerOutputProtocol {

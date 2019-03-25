@@ -12,6 +12,8 @@ final class SearchRemoteDataManager: SearchRemoteDataManagerInputProtocol {
     
     weak var interactor: SearchRemoteDataManagerOutputProtocol?
     
+    private var dataTask: URLSessionDataTask?
+    
     func fetchResults(for searchText: String, page: Int) {
         let searchText = searchText.replacingOccurrences(of: " ", with: "+", options: .literal)
         let urlString = "https://api.themoviedb.org/3/search/movie?api_key=\(Api.key)&language=en-US&query=\(searchText)&page=\(page)"
@@ -22,7 +24,9 @@ final class SearchRemoteDataManager: SearchRemoteDataManagerInputProtocol {
             }
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        cancelFetching()
+        
+        dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 return DispatchQueue.main.async {
                     self.interactor?.onError()
@@ -56,7 +60,12 @@ final class SearchRemoteDataManager: SearchRemoteDataManagerInputProtocol {
             DispatchQueue.main.async {
                 self.interactor?.onResultsFetched(movies)
             }
-            
-        }.resume()
+        }
+        
+        dataTask?.resume()
+    }
+    
+    func cancelFetching() {
+        dataTask?.cancel()
     }
 }
