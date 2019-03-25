@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F5613CC1224879F3007425E8 /* FavoritesRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5613CC0224879F3007425E8 /* FavoritesRemoteDataManager.swift */; };
 		F5613CC322487A0B007425E8 /* FavoritesLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5613CC222487A0B007425E8 /* FavoritesLocalDataManager.swift */; };
+		F5613CC62248A5C9007425E8 /* SearchRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5613CC52248A5C9007425E8 /* SearchRemoteDataManager.swift */; };
 		F5A570BF22441D4A00F73055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A570BE22441D4A00F73055 /* AppDelegate.swift */; };
 		F5A570C622441D4C00F73055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5A570C522441D4C00F73055 /* Assets.xcassets */; };
 		F5A570C922441D4C00F73055 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5A570C722441D4C00F73055 /* LaunchScreen.storyboard */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		F5613CC0224879F3007425E8 /* FavoritesRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRemoteDataManager.swift; sourceTree = "<group>"; };
 		F5613CC222487A0B007425E8 /* FavoritesLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesLocalDataManager.swift; sourceTree = "<group>"; };
+		F5613CC52248A5C9007425E8 /* SearchRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRemoteDataManager.swift; sourceTree = "<group>"; };
 		F5A570BB22441D4A00F73055 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A570BE22441D4A00F73055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5A570C522441D4C00F73055 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 				F5613CC222487A0B007425E8 /* FavoritesLocalDataManager.swift */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		F5613CC42248A5AF007425E8 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				F5613CC52248A5C9007425E8 /* SearchRemoteDataManager.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 		F5A570B222441D4A00F73055 = {
@@ -440,6 +450,7 @@
 		F5A570F22244399C00F73055 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				F5613CC42248A5AF007425E8 /* Remote */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -652,6 +663,7 @@
 				F5ACECE72247DC870023A9D8 /* DetailView.swift in Sources */,
 				F5ACECDA2245B5670023A9D8 /* Movie.swift in Sources */,
 				F5A571072244652A00F73055 /* TabBarView.swift in Sources */,
+				F5613CC62248A5C9007425E8 /* SearchRemoteDataManager.swift in Sources */,
 				F5A570BF22441D4A00F73055 /* AppDelegate.swift in Sources */,
 				F5A570FD22443DCC00F73055 /* LaunchRouter.swift in Sources */,
 				F5A571152244870C00F73055 /* SearchRouter.swift in Sources */,

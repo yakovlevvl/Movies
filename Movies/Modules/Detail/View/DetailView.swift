@@ -127,6 +127,10 @@ final class DetailView: UIViewController {
     @objc private func didTapFavoriteButton() {
         presenter?.didTapFavoriteButton()
     }
+    
+    private func hideFavoriteButton() {
+        navigationItem.rightBarButtonItem = nil
+    }
 }
 
 extension DetailView: DetailViewProtocol {
@@ -138,9 +142,12 @@ extension DetailView: DetailViewProtocol {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: movie.date)!
-        dateFormatter.dateStyle = .medium
-        dateLabel.text = dateFormatter.string(from: date)
+        if let date = dateFormatter.date(from: movie.date) {
+            dateFormatter.dateStyle = .medium
+            dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            dateLabel.text = movie.date
+        }
         
         countryLabel.text = movie.country ?? "Country"
         
@@ -154,6 +161,10 @@ extension DetailView: DetailViewProtocol {
         
         if let rating = movie.rating {
             ratingLabel.text = "\(rating)/10"
+        }
+        
+        if let isFavorited = movie.isFavorited, isFavorited {
+            hideFavoriteButton()
         }
         
         view.setNeedsLayout()

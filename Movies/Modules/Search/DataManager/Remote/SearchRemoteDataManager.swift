@@ -1,5 +1,5 @@
 //
-//  FavoritesRemoteDataManager.swift
+//  SearchRemoteDataManager.swift
 //  Movies
 //
 //  Created by Vladyslav Yakovlev on 3/25/19.
@@ -8,14 +8,21 @@
 
 import Foundation
 
-final class FavoritesRemoteDataManager: FavoritesRemoteDataManagerInputProtocol {
+final class SearchRemoteDataManager: SearchRemoteDataManagerInputProtocol {
     
-    weak var interactor: FavoritesRemoteDataManagerOutputProtocol?
+    weak var interactor: SearchRemoteDataManagerOutputProtocol?
     
-    func fetchMovies(page: Int) {
-        let urlString = "https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/movies?page=\(page)&sort_by=created_at.desc&language=en-US&session_id=\(Api.sessionId)&api_key=\(Api.key)"
+    func fetchResults(for searchText: String, page: Int) {
+        let searchText = searchText.replacingOccurrences(of: " ", with: "+", options: .literal)
+        let urlString = "https://api.themoviedb.org/3/search/movie?api_key=\(Api.key)&language=en-US&query=\(searchText)&page=\(page)"
         
-        URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
+        guard let url = URL(string: urlString) else {
+            return DispatchQueue.main.async {
+                self.interactor?.onError()
+            }
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 return DispatchQueue.main.async {
                     self.interactor?.onError()
@@ -43,13 +50,11 @@ final class FavoritesRemoteDataManager: FavoritesRemoteDataManagerInputProtocol 
                 
                 let movie = Movie(id: id, title: title, overview: overview, date: date, posterPath: posterPath)
                 
-                movie.isFavorited = true
-                
                 movies.append(movie)
             }
             
             DispatchQueue.main.async {
-                self.interactor?.onMoviesFetched(movies, page: page)
+                self.interactor?.onResultsFetched(movies)
             }
             
         }.resume()

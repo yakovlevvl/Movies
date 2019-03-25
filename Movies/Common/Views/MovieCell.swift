@@ -90,9 +90,12 @@ final class MovieCell: UICollectionViewCell {
     func setDate(_ date: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.date(from: date)!
-        dateFormatter.dateStyle = .medium
-        dateLabel.text = dateFormatter.string(from: date)
+        if let date = dateFormatter.date(from: date) {
+            dateFormatter.dateStyle = .medium
+            dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            dateLabel.text = date
+        }
     }
     
     func setPoster(_ image: UIImage?) {
@@ -103,6 +106,10 @@ final class MovieCell: UICollectionViewCell {
         titleLabel.backgroundColor = Colors.placeholder
         overviewLabel.backgroundColor = Colors.placeholder
         dateLabel.backgroundColor = Colors.placeholder
+        posterView.image = nil
+        titleLabel.text = ""
+        overviewLabel.text = ""
+        dateLabel.text = ""
     }
     
     func hideSkeleton() {

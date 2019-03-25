@@ -8,7 +8,23 @@
 
 import Foundation
 
-final class SearchInteractor {
+final class SearchInteractor: SearchInteractorInputProtocol {
     
+    weak var presenter: SearchInteractorOutputProtocol?
+    var remoteDataManager: SearchRemoteDataManagerInputProtocol?
     
+    func fetchResults(for searchText: String, page: Int) {
+        remoteDataManager?.fetchResults(for: searchText, page: page)
+    }
+}
+
+extension SearchInteractor: SearchRemoteDataManagerOutputProtocol {
+    
+    func onResultsFetched(_ results: [Movie]) {
+        presenter?.didFetchResults(results)
+    }
+    
+    func onError() {
+        presenter?.onError()
+    }
 }

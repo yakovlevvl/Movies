@@ -20,6 +20,8 @@ final class Movie: Codable {
     var rating: Double?
     var country: String?
     
+    var isFavorited: Bool?
+    
     var posterImage: UIImage?
     
     var posterUrl: URL? {
@@ -52,5 +54,6 @@ extension Movie {
         case overview
         case date
         case posterPath
+        case isFavorited
     }
 }
