@@ -1,19 +1,19 @@
 //
-//  PopularRemoteDataManager.swift
+//  FavoritesRemoteDataManager.swift
 //  Movies
 //
-//  Created by Vladyslav Yakovlev on 3/23/19.
+//  Created by Vladyslav Yakovlev on 3/25/19.
 //  Copyright © 2019 Vladyslav Yakovlev. All rights reserved.
 //
 
 import Foundation
 
-final class PopularRemoteDataManager: PopularRemoteDataManagerInputProtocol {
+final class FavoritesRemoteDataManager: FavoritesRemoteDataManagerInputProtocol {
     
-    weak var interactor: PopularRemoteDataManagerOutputProtocol?
+    weak var interactor: FavoritesRemoteDataManagerOutputProtocol?
     
     func fetchMovies(page: Int) {
-        let urlString = "https://api.themoviedb.org/3/movie/popular?page=\(page)&language=en-US&api_key=\(Api.key)"
+        let urlString = "https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite/movies?page=\(page)&sort_by=created_at.desc&language=en-US&session_id=\(Api.sessionId)&api_key=\(Api.key)"
         
         URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
             guard let data = data, error == nil else {
@@ -49,7 +49,7 @@ final class PopularRemoteDataManager: PopularRemoteDataManagerInputProtocol {
             DispatchQueue.main.async {
                 self.interactor?.onMoviesFetched(movies, page: page)
             }
-    
+            
         }.resume()
     }
 }

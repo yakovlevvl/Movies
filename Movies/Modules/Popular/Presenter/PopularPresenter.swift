@@ -48,6 +48,16 @@ final class PopularPresenter: PopularPresenterProtocol {
         paginationEnabled = false
         interactor?.fetchMovies(page: nextPage)
     }
+    
+    func didFinishInsertItems() {
+        paginationEnabled = true
+    }
+    
+    func didReceiveMemoryWarning() {
+        movies.forEach { movie in
+            movie.posterImage = nil
+        }
+    }
 }
 
 extension PopularPresenter: PopularInteractorOutputProtocol {
@@ -74,18 +84,8 @@ extension PopularPresenter: PopularInteractorOutputProtocol {
         }
     }
     
-    func didFinishInsertItems() {
-        paginationEnabled = true
-    }
-    
     func onError() {
         view?.showError()
         paginationEnabled = true
-    }
-    
-    func didReceiveMemoryWarning() {
-        movies.forEach { movie in
-            movie.posterImage = nil
-        }
     }
 }
