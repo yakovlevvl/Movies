@@ -159,7 +159,38 @@ extension DetailView: DetailViewProtocol {
         view.setNeedsLayout()
     }
     
-    func showError() {
+    func showAddToFavoritesSuccess() {
+        showMessage("Added to Favorites")
+    }
+    
+    func showAddToFavoritesError() {
+        showMessage("Error")
+    }
+    
+    func showFetchError() {
         print("detailView update error")
+    }
+}
+
+extension DetailView {
+    
+    private func showMessage(_ message: String) {
+        let label = UILabel()
+        label.text = message
+        label.font = UIFont(name: Fonts.avenir, size: 20)
+        label.sizeToFit()
+        label.frame.size = CGSize(width: label.frame.width + 50, height: 70)
+        label.backgroundColor = UIColor(white: 0.98, alpha: 1)
+        label.textAlignment = .center
+        label.center = scrollView.center
+        view.addSubview(label)
+        label.alpha = 0
+        label.clipsToBounds = true
+        label.layer.cornerRadius = label.frame.height/2
+        UIView.animate(withDuration: 0.2, animations: { label.alpha = 1 }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 1.0, options: [], animations: { label.alpha = 0 }) { _ in
+                label.removeFromSuperview()
+            }
+        }
     }
 }

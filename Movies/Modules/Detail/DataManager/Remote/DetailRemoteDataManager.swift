@@ -18,13 +18,13 @@ final class DetailRemoteDataManager: DetailRemoteDataManagerInputProtocol {
         URLSession.shared.dataTask(with: URL(string: urlString)!) { data, response, error in
             guard let data = data, error == nil else {
                 return DispatchQueue.main.async {
-                    self.interactor?.onError()
+                    self.interactor?.onFetchError()
                 }
             }
             
             guard let json = (try? JSONSerialization.jsonObject(with: data)) as? Json else {
                 return DispatchQueue.main.async {
-                    self.interactor?.onError()
+                    self.interactor?.onFetchError()
                 }
             }
             
@@ -33,7 +33,7 @@ final class DetailRemoteDataManager: DetailRemoteDataManagerInputProtocol {
                 let countries = json["production_countries"] as? [Json],
                 let country = countries.first?["name"] as? String else {
                     return DispatchQueue.main.async {
-                        self.interactor?.onError()
+                        self.interactor?.onFetchError()
                     }
             }
             
@@ -45,6 +45,39 @@ final class DetailRemoteDataManager: DetailRemoteDataManagerInputProtocol {
                 self.interactor?.onDetailsFetched(for: movie)
             }
             
+        }.resume()
+    }
+    
+    func addToFavorites(movie: Movie) {
+        let headers = ["content-type": "application/json;charset=utf-8"]
+        let postJson = [
+            "media_type": "movie",
+            "media_id": movie.id,
+            "favorite": true
+            ] as Json
+        
+        let postData = try! JSONSerialization.data(withJSONObject: postJson, options: .prettyPrinted)
+        
+        let urlString = "https://api.themoviedb.org/3/account/%7Baccount_id%7D/favorite?session_id=\(Api.sessionId)&api_key=\(Api.key)"
+        
+        var request = URLRequest(url: URL(string: urlString)!,
+                                 cachePolicy: .useProtocolCachePolicy,
+                                 timeoutInterval: 10.0)
+        
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
+        request.httpBody = postData
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                if let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode == 201,
+                    error == nil {
+                    self.interactor?.onAddToFavoritesSuccess(movie)
+                } else {
+                    self.interactor?.onAddToFavoritesError()
+                }
+            }
         }.resume()
     }
 }

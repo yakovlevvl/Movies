@@ -16,7 +16,11 @@ protocol DetailViewProtocol: class {
     
     func update(for movie: Movie)
     
-    func showError()
+    func showAddToFavoritesSuccess()
+    
+    func showAddToFavoritesError()
+    
+    func showFetchError()
 }
 
 protocol DetailPresenterProtocol: class {
@@ -47,7 +51,11 @@ protocol DetailInteractorOutputProtocol: class {
     
     func didFetchDetails(for movie: Movie)
     
-    func onError()
+    func didAddToFavorites(movie: Movie)
+    
+    func onAddToFavoritesError()
+    
+    func onFetchError()
 }
 
 protocol DetailInteractorInputProtocol: class {
@@ -58,6 +66,8 @@ protocol DetailInteractorInputProtocol: class {
     // Presenter -> Interactor
     
     func fetchDetails(for movie: Movie)
+    
+    func addToFavorites(movie: Movie)
 }
 
 protocol DetailRemoteDataManagerInputProtocol: class {
@@ -67,6 +77,8 @@ protocol DetailRemoteDataManagerInputProtocol: class {
     // Interactor -> RemoteDataManager
     
     func fetchDetails(for movie: Movie)
+    
+    func addToFavorites(movie: Movie)
 }
 
 protocol DetailRemoteDataManagerOutputProtocol: class {
@@ -75,5 +87,9 @@ protocol DetailRemoteDataManagerOutputProtocol: class {
     
     func onDetailsFetched(for movie: Movie)
     
-    func onError()
+    func onAddToFavoritesSuccess(_ movie: Movie)
+    
+    func onAddToFavoritesError()
+    
+    func onFetchError()
 }

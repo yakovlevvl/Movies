@@ -17,6 +17,10 @@ final class DetailInteractor: DetailInteractorInputProtocol {
     func fetchDetails(for movie: Movie) {
         remoteDataManager?.fetchDetails(for: movie)
     }
+    
+    func addToFavorites(movie: Movie) {
+        remoteDataManager?.addToFavorites(movie: movie)
+    }
 }
 
 extension DetailInteractor: DetailRemoteDataManagerOutputProtocol {
@@ -25,7 +29,15 @@ extension DetailInteractor: DetailRemoteDataManagerOutputProtocol {
         presenter?.didFetchDetails(for: movie)
     }
     
-    func onError() {
-        presenter?.onError()
+    func onAddToFavoritesSuccess(_ movie: Movie) {
+        presenter?.didAddToFavorites(movie: movie)
+    }
+    
+    func onAddToFavoritesError() {
+        presenter?.onAddToFavoritesError()
+    }
+    
+    func onFetchError() {
+        presenter?.onFetchError()
     }
 }

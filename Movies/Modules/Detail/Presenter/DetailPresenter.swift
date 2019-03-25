@@ -24,17 +24,25 @@ final class DetailPresenter: DetailPresenterProtocol {
     }
     
     func didTapFavoriteButton() {
-        
+        interactor?.addToFavorites(movie: movie)
     }
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol {
-    
+
     func didFetchDetails(for movie: Movie) {
         view?.update(for: movie)
     }
     
-    func onError() {
-        view?.showError()
+    func didAddToFavorites(movie: Movie) {
+        view?.showAddToFavoritesSuccess()
+    }
+    
+    func onAddToFavoritesError() {
+        view?.showAddToFavoritesError()
+    }
+    
+    func onFetchError() {
+        view?.showFetchError()
     }
 }
