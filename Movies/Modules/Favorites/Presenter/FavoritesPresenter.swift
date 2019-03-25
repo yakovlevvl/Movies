@@ -40,6 +40,7 @@ final class FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func showDetailForMovie(with index: Int) {
+        if skeletonEnabled { return }
         router?.presentDetailView(from: view!, for: movies[index])
     }
     

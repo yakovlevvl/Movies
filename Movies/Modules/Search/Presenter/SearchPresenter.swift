@@ -37,6 +37,7 @@ final class SearchPresenter: SearchPresenterProtocol {
     }
     
     func showDetailForMovie(with index: Int) {
+        if skeletonEnabled { return }
         router?.presentDetailView(from: view!, for: results[index])
     }
     
